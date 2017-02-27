@@ -3,20 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package dustorage;
 
 /**
  *
  * @author seraf
  */
-public class Category {
-    /**
-     * ID категории
-     */
+public class Tag {
     protected int id;
-    /**
-     * Название категории
-     */
     protected String name;
 
     public int getId() {
