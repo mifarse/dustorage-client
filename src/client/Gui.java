@@ -1,10 +1,8 @@
 package client;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import layout.TableLayout;
 
 /**
  *
@@ -15,39 +13,19 @@ public class Gui {
         
         JFrame frame = new JFrame("Окошко");
         frame.setVisible(true);
-        frame.setSize(500,600);
+        frame.setBounds(100, 100, 1024, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        JButton jButton = new JButton("Обработать фоточки");
-        jButton.setSize(300,20);
-        frame.add(jButton);
-       
-        JButton uploadButton = new JButton("Загрузить фотки");
-        uploadButton.setSize(300,20);
-        frame.add(uploadButton);
+        double[][] size = {
+            {0.75, 0.25},
+            {TableLayout.FILL}
+        };
+        frame.setLayout(new TableLayout(size));
+        frame.setResizable(false);
         
-        
-        
-        uploadButton.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Ftp ftpManager = new Ftp();
-                ftpManager.connect("192.168.1.96", "pi", "myraspbianromance");
-                ftpManager.t();
-            }
-            
-        });
-        
-        jButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FileManager.orderFiles();
-                jButton.setText("Done! Storage Size: "+
-                        FileManager.getOriginalsSize()+" Mb");
-            }
-        });
-        
+        frame.add(new Welcome(), "0,0");
+        frame.add(new Menu(), "1,0");
         frame.setVisible(true);
     }
 }
